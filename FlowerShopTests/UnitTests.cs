@@ -16,15 +16,16 @@ namespace Tests
         {
 
             //ARRANGE
-            Order o = Substitute.For<Order>();
-            IOrderDAO iod = Substitute.For<IOrderDAO>();
+            IClient c = Substitute.For<IClient>();
+            IOrderDAO dao = Substitute.For<IOrderDAO>();
             IOrder io = Substitute.For<IOrder>();
+            IOrder o = new Order(dao,c);
 
             //ACT
-            o.Deliver();
+            o.Deliver(dao, io);
 
             //ASSERT
-            iod.DidNotReceive().SetDelivered(io);
+            dao.Received().SetDelivered(io);
 
         }
     }

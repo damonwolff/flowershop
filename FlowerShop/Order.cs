@@ -43,6 +43,7 @@ namespace FlowerShop
             this.isDelivered = isDelivered;
             Client = client;
             Id = dao.AddOrder(client);
+            
         }
 
         public void AddFlowers(IFlower flower, int n)
@@ -50,9 +51,9 @@ namespace FlowerShop
             throw new NotImplementedException();
         }
 
-        public void Deliver()
+        public void Deliver(IOrderDAO dao, IOrder io)
         {
-            throw new NotImplementedException();
+            dao.SetDelivered(io);
         }
     }
 }
