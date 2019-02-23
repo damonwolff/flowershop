@@ -20,7 +20,7 @@ namespace Tests
             IOrderDAO dao = Substitute.For<IOrderDAO>();
             IOrder io = Substitute.For<IOrder>();
             IOrder o = new Order(dao,c);
-
+            
             //ACT
             o.Deliver(dao, io);
 
@@ -28,5 +28,31 @@ namespace Tests
             dao.Received().SetDelivered(io);
 
         }
+
+        [Test]
+        public void Test2() {
+
+            //ARRANGE
+            IClient c = Substitute.For<IClient>();
+            IOrderDAO dao = Substitute.For<IOrderDAO>();
+            IOrder io = Substitute.For<IOrder>();
+
+
+            Order o = Substitute.For<Order>(dao, c);
+            IFlowerDAO fdao = Substitute.For<IFlowerDAO>();
+
+            Flower f = Substitute.For<Flower>(fdao, "tester", 100, 1);
+
+            //ACT
+            o = new Order(dao, c);
+            f = new Flower(fdao, "tester", 100, 1);
+            
+
+            //ASSERT
+            Assert.AreEqual(120, o.Price);
+
+        }
+
+
     }
 }
