@@ -50,9 +50,11 @@ namespace FlowerShop
             
         }
 
-        public void AddFlowers(IFlower flower, int n)
+        public void AddFlowers(IFlowerDAO fdao, Flower flower, int n)
         {
-            throw new NotImplementedException();
+            flower = new Flower(fdao,flower.Description, flower.Cost, flower.Stock);
+            flowers = new List<Flower>();
+            flowers.Add(flower);
         }
 
         public void Deliver(IOrderDAO dao, IOrder io)

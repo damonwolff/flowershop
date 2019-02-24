@@ -36,18 +36,15 @@ namespace Tests
             IClient c = Substitute.For<IClient>();
             IOrderDAO dao = Substitute.For<IOrderDAO>();
             IOrder io = Substitute.For<IOrder>();
-
-
             Order o = Substitute.For<Order>(dao, c);
             IFlowerDAO fdao = Substitute.For<IFlowerDAO>();
-
-            Flower f = Substitute.For<Flower>(fdao, "tester", 100, 1);
+            Flower f = Substitute.For<Flower>(fdao, "Rose", 100, 1);
 
             //ACT
+            f = new Flower(fdao, "Rose", 100, 1);
             o = new Order(dao, c);
-            f = new Flower(fdao, "tester", 100, 1);
-            
-
+            o.AddFlowers(fdao, f, 1);
+           
             //ASSERT
             Assert.AreEqual(120, o.Price);
 
